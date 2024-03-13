@@ -1,0 +1,231 @@
+
+<!-- saved from url=(0040)https://nicklashansen.github.io/modemrl/ -->
+<html><head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>PFNeRF</title>
+	<meta property="og:title" content="Point Cloud Fusion NeRF">
+	<meta property="og:description" content="Depth-Guided Robust Point Cloud Fusion NeRF for Sparse Input Views">
+	<link rel="stylesheet" href="./Config/style.css">
+	<link rel="stylesheet" href="./Config/css">
+	<link rel="stylesheet" href="./Config/font-awesome.min.css">
+
+  <style id="ar94e88e2a9dstyle">
+                .ar94e88e2a9dhidden{ position:absolute !important; opacity:0 !important; pointer-events:none !important}
+            </style></head>
+<body><div class="header" id="top">
+          <h1 class="title is-1 publication-title" style="font-size: 45px;"><span style="color: #c03d3e;;font-weight: bolder;">PFNeRF</span></h1>
+         <h1 class="title is-3 publication-title" style="font-size: 30px; margin-top: -20px;">Depth-Guided Robust <span style="color: #c03d3e;font-weight: bolder;">P</span>oint Cloud <span style="color: #c03d3e;font-weight: bolder;">F</span>usion <span style="color: #c03d3e;font-weight: bolder;">NeRF</span> for Sparse Input Views </h1>
+   <table class="authors">
+    <tbody>
+      <tr>
+        <td>
+          <h4>
+            <span class="authors">
+            <a style="font-weight: bold; ">Shuai Guo</a> &nbsp;
+            <a style="font-weight: bold;">Qiuwen Wang</a> &nbsp;
+            <a style="font-weight: bold;">Yijie Gao</a> &nbsp;
+            <a style="font-weight: bold; ">Rong Xie</a> &nbsp;
+            <a style="font-weight: bold; ">Lin Li</a> &nbsp;
+            <a style="font-weight: bold; ">Fang Zhu</a> &nbsp;
+            <a style="font-weight: bold; ">Li Song</a> &nbsp;
+
+          </span>
+
+          <span class="authors-affiliation" style="font-size: 20px;">
+            Shanghai Jiao Tong University
+          </span>
+        <br>
+        <span class="authors-affiliation">
+                    </h4>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <div class="links" style="margin-top:-1.5%;">
+    
+    <a class="btn"><svg class="svg-inline--fa fa-file-pdf fa-w-12 fa-lg" style="width: 18px; height: 18px;" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="file-pdf" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 500" data-fa-i2svg=""><path fill="currentColor" d="M181.9 256.1c-5-16-4.9-46.9-2-46.9 8.4 0 7.6 36.9 2 46.9zm-1.7 47.2c-7.7 20.2-17.3 43.3-28.4 62.7 18.3-7 39-17.2 62.9-21.9-12.7-9.6-24.9-23.4-34.5-40.8zM86.1 428.1c0 .8 13.2-5.4 34.9-40.2-6.7 6.3-29.1 24.5-34.9 40.2zM248 160h136v328c0 13.3-10.7 24-24 24H24c-13.3 0-24-10.7-24-24V24C0 10.7 10.7 0 24 0h200v136c0 13.2 10.8 24 24 24zm-8 171.8c-20-12.2-33.3-29-42.7-53.8 4.5-18.5 11.6-46.6 6.2-64.2-4.7-29.4-42.4-26.5-47.8-6.8-5 18.3-.4 44.1 8.1 77-11.6 27.6-28.7 64.6-40.8 85.8-.1 0-.1.1-.2.1-27.1 13.9-73.6 44.5-54.5 68 5.6 6.9 16 10 21.5 10 17.9 0 35.7-18 61.1-61.8 25.8-8.5 54.1-19.1 79-23.2 21.7 11.8 47.1 19.5 64 19.5 29.2 0 31.2-32 19.7-43.4-13.9-13.6-54.3-9.7-73.6-7.2zM377 105L279 7c-4.5-4.5-10.6-7-17-7h-6v128h128v-6.1c0-6.3-2.5-12.4-7-16.9zm-74.1 255.3c4.1-2.7-2.5-11.9-42.8-9 37.1 15.8 42.8 9 42.8 9z"></path></svg>&nbsp;&nbsp;Paper (come soon)</a>&nbsp;&nbsp;
+    <a class="btn"><svg class="svg-inline--fa fa-github fa-w-16" style="width: 18px; height: 18px;" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="github" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 -50 484 500" data-fa-i2svg=""><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"></path></svg>&nbsp;&nbsp;Code (come soon) <span style="font-size: 10px;"></span></a>
+  </div>
+</div>
+
+<!--<div class="content">-->
+<!--	<div class="question" style="text-align: center; font-size: 26px; font-style: italic; background-color: #dddddd; display: flex; justify-content: center; align-items: center;">-->
+<!--    <br>-->
+<!--    "Can we unleash the power of pre-trained LMs to solve <br> sequential decision-making problems?" <br> &ensp;-->
+<!--  </div>-->
+	<div>
+      <div class="figure-caption" style="width: 70%">
+			<p style="font-size: 17px;">
+Novel-view synthesis with sparse input views is important for practical applications such as AR/VR and autonomous driving. Many works in this field have already integrated depth information into NeRF, utilizing depth priors for assistance in geometric and spatial understanding. However, most existing work tends to either overlook the inaccuracies in depth maps or only handle them roughly, limiting the effectiveness of the synthesis. To address this issue, we propose a depth-guided robust point cloud fusion NeRF for sparse input synthesis. We first construct a point cloud for each input view, with a novel point cloud representation based on learnable matrices and vectors. Then, through an additional lightweight scene fusion network, we fuse the point clouds from each input view to build a point cloud of the entire scene. By optimizing the point cloud representation and scene fusion network, inaccuracies in the depth map can be adjusted and refined, thereby achieving a more precise perception of the overall scene. Each voxel in the scene is determined by referencing the fused point cloud to establish its density and appearance. Experimental results demonstrate that our method outperforms state-of-the-art baselines.
+</p>
+
+  	</div><div class="hr"></div>
+	<div>
+		<h2 style="font-size: 35px;">Method</h2>
+		<div class="figure-caption" style="width: 70%">
+			<p style="font-size: 17px;">
+
+We conceptualize the neural radiance field as a voxel grid of explicit features, consisting of a series of learnable vectors and matrices that characterize the density and texture features along their respective axes. And we introduce a new method of point cloud representation based on the learnable vectors and matrices. We also develop a lightweight scene fusion network, which is designed to provide a more comprehensive comprehension of the overall scene while reducing the influence of inaccuracies furthermore. This network employs a large-kernel 3D CNN architecture, consisting of only a few layers. The innovative representation of the point cloud serves as an effective initialization for radiance field. During the process of point cloud fusion and optimization, the point cloud representations of input views are effectively adjusted, and an overall point cloud representation is constructed for the scene. Each voxel within the 3D space determines its density and appearance by referencing the point cloud of the entire scene. And we introduce a L2-norm regularization method to prevent the occurrence of infinite densities which can occasionally happen. Finally, each voxel determines its density and appearance within the scene by referencing this fused point cloud.
+
+			</p>
+		</div>
+	</div>
+        <div style="text-align: center;">
+          <figure style="display: inline-block; max-width: 70%;">
+            <img src="Assets/arc.png" alt="Pipeline Image" style="max-width: 100%;">
+<!--            <figcaption>The workflow of <span style="color: rgb(128, 185, 90); font-weight: bolder;">Uni-O4</span> online-offline-online fine-tuning framework on real-world robots. </figcaption>-->
+          </figure>
+        </div>
+
+
+
+	<div class="hr"></div>
+	<div>
+		<h2 style="font-size: 35px;">Comparisons</h2>
+		<div class="figure-caption" style="width: 70%">
+			<p>
+We compare our method with some other methods with <span style="font-weight: bolder; color: #c03d3e;">3</span> input views of LLFF dataset.
+			</p>
+		</div>
+        <div class="content-video" style="margin-bottom: 40px">
+<!--          <h3 style="font-weight: bolder; font-size: 22px;">Trained with 24 Views</h3>-->
+
+
+
+          <div class="content-video-container" >
+            <div class="content-video-frame" >
+              <span>RegNeRF</span>
+              <video playsinline="" autoplay="" loop="" preload="" muted="" width="100%">
+                <source src="RegNeRF/flower.mp4" type="video/mp4">
+              </video>
+            </div>
+
+
+            <div class="content-video-frame" >
+              <span>DSNeRF</span>
+              <video playsinline="" autoplay="" loop="" preload="" muted="" width="100%">
+                <source src="DSNeRF/flower.mp4" type="video/mp4">
+              </video>
+            </div>
+
+
+            <div class="content-video-frame" >
+              <span>SimpleNeRF</span>
+              <video playsinline="" autoplay="" loop="" preload="" muted="" width="100%">
+                <source src="SimpleNeRF/flower.mp4" type="video/mp4">
+              </video>
+            </div>
+
+            <div class="content-video-frame" >
+             <span style="font-weight: bolder; color: #c03d3e;">Our Method</span>
+              <video playsinline="" autoplay="" loop="" preload="" muted="" width="100%">
+                <source src="Ours/flower.mp4" type="video/mp4">
+              </video>
+            </div>
+
+            <div class="content-video-frame" >
+              <video playsinline="" autoplay="" loop="" preload="" muted="" width="100%">
+                <source src="RegNeRF/orchids.mp4" type="video/mp4">
+              </video>
+            </div>
+
+
+            <div class="content-video-frame" >
+              <video playsinline="" autoplay="" loop="" preload="" muted="" width="100%">
+                <source src="DSNeRF/orchids.mp4" type="video/mp4">
+              </video>
+            </div>
+
+            <div class="content-video-frame" >
+              <video playsinline="" autoplay="" loop="" preload="" muted="" width="100%">
+                <source src="SimpleNeRF/orchids_sparse.mp4" type="video/mp4">
+              </video>
+            </div>
+
+
+            <div class="content-video-frame" >
+              <video playsinline="" autoplay="" loop="" preload="" muted="" width="100%">
+                <source src="Ours/orchids.mp4" type="video/mp4">
+              </video>
+            </div>
+
+          </div>
+        </div>
+    </div>
+
+<div class="hr"></div>
+
+  <div>
+    <h2 style="font-size: 35px;">More Results</h2>
+    <div class="figure-caption" style="width: 70%">
+      <p>
+We also show more results of our method with <span style="font-weight: bolder; color: #c03d3e;">3</span> input views of DTU dataset and RealEstate10K dataset.
+      </p>
+    </div>
+        <div class="content-video" style="margin-bottom: 40px">
+<!--          <h3 style="font-weight: bolder; font-size: 22px;">Trained with 24 Views</h3>-->
+
+
+
+          <div class="content-video-container" >
+            <div class="content-video-frame" >
+              <video playsinline="" autoplay="" loop="" preload="" muted="" width="100%">
+                <source src="Ours/scan103.mp4" type="video/mp4">
+              </video>
+            </div>
+
+
+            <div class="content-video-frame" >
+              <video playsinline="" autoplay="" loop="" preload="" muted="" width="100%">
+                <source src="Ours/scan82.mp4" type="video/mp4">
+              </video>
+            </div>
+
+            <div class="content-video-frame" >
+              <video playsinline="" autoplay="" loop="" preload="" muted="" width="100%">
+                <source src="Ours/11.mp4" type="video/mp4">
+              </video>
+            </div>
+
+
+            <div class="content-video-frame" >
+              <video playsinline="" autoplay="" loop="" preload="" muted="" width="100%">
+                <source src="Ours/22.mp4" type="video/mp4">
+              </video>
+            </div>
+
+          </div>
+        </div>
+    </div>
+
+<div class="hr"></div>
+
+
+<footer>
+  Website borrowed from  <a rel="license" href="https://gemcollector.github.io/RL-ViGen/">RL-ViGen</a> and
+   <a rel="license" href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>
+<!--<a href="https://zehaozhu.github.io/PFNeRF/#top" class="bold">To top ↑</a>-->
+</footer>
+
+<!--<div class="columns is-centered">-->
+<!--      <div class="column is-8">-->
+<!--        <div class="content">-->
+<!--          <p>-->
+<!--            This website is licensed under a <a rel="license"-->
+<!--                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative-->
+<!--            Commons Attribution-ShareAlike 4.0 International License</a>.-->
+<!--          </p>-->
+<!--          <p>-->
+<!--            This means you are free to borrow the <a-->
+<!--              href="https://github.com/nerfies/nerfies.github.io">source code</a> of this website,-->
+<!--            we just ask that you link back to this page in the footer.-->
+<!--            Please remember to remove the analytics code included in the header of the website which-->
+<!--            you do not want on your website.-->
+<!--          </p>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<script src="chrome-extension://klbdahhocigoaoaanhoghblieoadfgcj/scripts/start.js"></script></body></html>
